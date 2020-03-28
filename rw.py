@@ -28,7 +28,7 @@ def readlines(fileName):
 def parseLines(lines):
     # Generate data dictionary from lines
 
-    #Dict holding problem data
+    # Dict holding problem data
     data = {}    
 
     # Extraction: maxTime, numPieces, numMachines operationsByPiece 
@@ -69,9 +69,37 @@ def parseLines(lines):
     return data
 
 
+def calculateExtra(data):
+    # Extra calculations associated to data
+    
+    data["extra"] = {}
+
+    # Calculate: totalPieceDurationByPiece
+    durationByPieceAndOperation = []
+    for piece in data["durationByPieceAndOperation"]:
+        totalPieceDuration = 0
+        for operationTime in piece:
+            totalPieceDuration = totalPieceDuration + operationTime
+        durationByPieceAndOperation.append(totalPieceDuration)
+    data["extra"]["totalPieceDurationByPiece"]= durationByPieceAndOperation
+
+    # Calculate: workingCostAverageByPiece
+    workingCostAverageByPiece = []
+    for piece in data["workingCostByPieceAndOperation"]:
+        sumWorkingCost = 0
+        for workingCost in piece:
+            sumWorkingCost = sumWorkingCost + workingCost
+        workingCostAverage = sumWorkingCost/len(piece)
+        workingCostAverageByPiece.append(workingCostAverage)
+    data["extra"]["workingCostAverageByPiece"]= workingCostAverageByPiece
+
+    return data
+
+    
 def getData(fileName):
     lines = readlines(fileName)
     data = parseLines(lines)
+    data = calculateExtra(data)
     return data
 
 def writeToJson(data):
