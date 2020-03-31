@@ -1,16 +1,8 @@
-import json
-import re
+from helper import pprint, writeToJson
 import os
 
 examplesFolder = 'dataExamples'
 
-
-def pprint(obj):
-    # Pretty print json objects
-
-    json_formatted_str = json.dumps(obj, indent=1)
-    print(re.sub(r'",\s+', '", ', json_formatted_str))
-    return
 
 def readlines(fileName):
     #Array holding text file lines
@@ -18,7 +10,7 @@ def readlines(fileName):
     lines = []
 
     with open(os.path.join(examplesFolder, fileName)) as fp:
-        for lineNumber, line in enumerate(fp):
+        for line in fp:
             #Append to line array without \n (line break)
             lines.append(line.replace('\n',''))             
     fp.close()
@@ -102,14 +94,8 @@ def getData(fileName):
     data = calculateExtra(data)
     return data
 
-def writeToJson(data):
-    # Debugging purposes
-    # Writes to data.json file data json dictionary
-
-    f = open("data.json","w")
-    f.write( json.dumps(data) )
-    f.close()  
 
 
-data = getData("ejemplar_calibrado_2.txt")
-writeToJson(data)
+# For testing this module
+# data = getData("ejemplar_calibrado_1.txt")
+# writeToJson(data)
