@@ -27,12 +27,12 @@ def parseLines(lines):
     data["maxTime"] = float(lines[0])
     data["numPieces"] = int(lines[1])
     data["numMachines"] = int(lines[2])
-    data["operationsByPiece"] = lines[3].split('*')
+    data["operationsByPiece"] = [int(x) for x in lines[3].split('*')]#lines[3].split('*')
 
     # Extraction: Mij, machineByPieceAndOperation
     Mij=[]
     for linesIndex in range(4,4+data["numPieces"]):
-        lineSplitted = [float(x) for x in lines[linesIndex].split('*')]
+        lineSplitted = [int(x) for x in lines[linesIndex].split('*')]
         Mij.append(lineSplitted)
     
     data["machineByPieceAndOperation"] = Mij
@@ -47,9 +47,7 @@ def parseLines(lines):
 
     # Extraction: CRi, ruptureCostByPiece
     CRindexLine = 4+data["numPieces"]*2
-    CRi=[]
-    CRi=lines[CRindexLine].split('*')
-    data["ruptureCostByPiece"] = CRi
+    data["ruptureCostByPiece"] = [float(x) for x in lines[CRindexLine].split('*')]
 
     # Extraction: TPij, workingCostByPieceAndOperation
     CTEij=[]
@@ -97,5 +95,5 @@ def getData(fileName):
 
 
 # For testing this module
-# data = getData("ejemplar_calibrado_1.txt")
-# writeToJson(data)
+#data = getData("001_easy.txt")
+#writeToJson(data,'readed')

@@ -1,5 +1,6 @@
+from helper import dprint
 
-
+debug=False
 
 def getPieceOrderBy(data, order, reverse):
     # Total duration: Order by totalPieceDurationByPiece
@@ -9,7 +10,9 @@ def getPieceOrderBy(data, order, reverse):
     
     elif order == "WORKING_COST_AVERAGE":
         pieceOrder = getIndexSorted(data["extra"]['workingCostAverageByPiece'],reverse)
-    
+
+
+    dprint('pieceOrder: '+str(pieceOrder),debug)
     return pieceOrder
 
 

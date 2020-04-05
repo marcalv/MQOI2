@@ -1,23 +1,31 @@
 from read import getData
 from sorting import getPieceOrderBy
+from placing import placePieces
+from evaluate import calculateCost
+from helper import pprint, writeToJson, dprint
 import time
+import numpy
 
+debug = False
 start_time = time.time()
 
-# txt file to open
-dataFileExample = "ejemplar_calibrado_1.txt"
 # get data from file
+dataFileExample = "ejemplar_calibrado_1.txt"
 data = getData(dataFileExample)
 
-# Get piece order by TOTAL_PIECE_DURATION or WORKING_COST_AVERAGE ascending or descending
-for i in range(1,1000):
-    pieceOrder1 = getPieceOrderBy(data, "TOTAL_PIECE_DURATION", True)
-    pieceOrder2 = getPieceOrderBy(data, "TOTAL_PIECE_DURATION", False)
-    pieceOrder3 = getPieceOrderBy(data, "WORKING_COST_AVERAGE", True)
-    pieceOrder4 = getPieceOrderBy(data, "WORKING_COST_AVERAGE", False)
-print(pieceOrder1)
-print(pieceOrder2)
-print(pieceOrder3)
-print(pieceOrder4)
+# Get Piece Order
+pieceOrder = getPieceOrderBy(data, "TOTAL_PIECE_DURATION", True)
+
+
+# Get schedule
+operationAsignmentByMachineAndOperationSorted,operationAsignmentByPieceAndOperation = placePieces(data,pieceOrder)
+
+# calculate cost
+totalCost = calculateCost(data,operationAsignmentByMachineAndOperationSorted,operationAsignmentByPieceAndOperation)
+
 
 print("--- %s seconds ---" % (time.time() - start_time))
+
+
+writeToJson(operationAsignmentByMachineAndOperationSorted,'resultMachineOperationSorted')
+writeToJson(operationAsignmentByPieceAndOperation,'resultPieceOperation')
