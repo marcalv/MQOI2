@@ -1,0 +1,12 @@
+[El programa se ha de ejecutar bajo Windows]
+
+- Descomprir el contenido del fichero .zip en cualquier carpeta
+
+- En la misma carpeta donde se ha descomprimido, copiar el ejemplar y la solución de ese ejemplar (a modo de ejemplo, dentro del .zip hay "ejemplar.txt" y "sol_ejemplar.txt")
+
+- Abrir una ventana de "Command Prompt" (instrucción "cmd") en Windows e ir a la carpeta donde se ha descomprimido el fichero (comando "cd [ruta de la carpeta]")
+
+- Escribir lo siguiente: java TEST_estudiante EJEMPLAR SOLUCION (donde EJEMPLAR es el nombre del fichero del ejemplar y SOLUCION el nombre del fichero de la solución). Por ejemplo: java TEST_estudiante ejemplar.txt sol_ejemplar.txt
+
+
+

@@ -34,19 +34,18 @@ def calculateCost(data,operationAsignmentByMachineAndOperationSorted,operationAs
 
     dprint('workingCost: '+str(acumulatedWorkingCost),debug)
 
-    # Rupture Cost
-    acumulatedRuptureCost = 0
-    for pieceIdx in range(0,len(operationAsignmentByPieceAndOperation)):
-        piece = operationAsignmentByPieceAndOperation[pieceIdx]
-        if piece[len(piece)-1]['end'] > data['maxTime']:
-            ruptureTime = piece[len(piece)-1]['end'] - data['maxTime']
-        else:
-            ruptureTime = 0
-        ruptureCost = ruptureTime * data['ruptureCostByPiece'][pieceIdx]
-        acumulatedRuptureCost = acumulatedRuptureCost + ruptureCost
-        dprint('Tiempo de ruptura pieza '+str(pieceIdx)+' = '+str(ruptureTime),debug)
+    if shippingTime > data["maxTime"]:
+        # Rupture Cost
+        acumulatedRuptureCost = 0
+        for pieceIdx in range(0,len(operationAsignmentByPieceAndOperation)):
+            ruptureTime = shippingTime - data["maxTime"]
+            ruptureCost = ruptureTime * data['ruptureCostByPiece'][pieceIdx]
+            acumulatedRuptureCost = acumulatedRuptureCost + ruptureCost
+            dprint('Tiempo de ruptura pieza '+str(pieceIdx)+' = '+str(ruptureTime),debug)
+    else:
+        acumulatedRuptureCost = 0
 
-    dprint('RuptureCost: '+str(acumulatedRuptureCost),debug)
+    dprint('RuptureCost: '+str(acumulatedRuptureCost),True)
 
     totalCost = acumulatedWorkingCost + acumulatedRuptureCost
 

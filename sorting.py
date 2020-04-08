@@ -2,9 +2,17 @@ from helper import dprint
 
 debug=False
 
-def getPieceOrderBy(data, order, reverse):
+def getPieceOrderBy(data, order):
     # Total duration: Order by totalPieceDurationByPiece
     # reverse: True (high to low)
+    if order[-4:] == "_INV":
+        reverse = False
+        order = order[:-4]
+    else:
+        reverse = True
+
+    
+
     if order == "TOTAL_PIECE_DURATION":
         pieceOrder = getIndexSorted(data["extra"]['totalPieceDurationByPiece'],reverse)
     

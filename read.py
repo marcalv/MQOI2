@@ -8,7 +8,7 @@ def readlines(fileName):
     #Array holding text file lines
 
     lines = []
-
+    
     with open(os.path.join(examplesFolder, fileName)) as fp:
         for line in fp:
             #Append to line array without \n (line break)
@@ -94,6 +94,3 @@ def getData(fileName):
 
 
 
-# For testing this module
-#data = getData("001_easy.txt")
-#writeToJson(data,'readed')
