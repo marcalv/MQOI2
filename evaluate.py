@@ -2,19 +2,19 @@ from helper import dprint
 
 debug = False
 
-def calculateShippingTime(data,operationAsignmentByMachineAndOperationSorted):
+def calculateShippingTime(data,operationAsignmentByPieceAndOperation):
     # Calcular  fecha  de entrega
     shippingTime = data["maxTime"]
-    for machineIdx in range(0,len(operationAsignmentByMachineAndOperationSorted)):
-        lastOperation = operationAsignmentByMachineAndOperationSorted[machineIdx][len(operationAsignmentByMachineAndOperationSorted[machineIdx])-1]
+    for pieceIdx in range(0,len(operationAsignmentByPieceAndOperation)):
+        lastOperation = operationAsignmentByPieceAndOperation[pieceIdx][len(operationAsignmentByPieceAndOperation[pieceIdx])-1]
         if lastOperation['end'] > shippingTime:
             shippingTime = lastOperation['end']
     
     return shippingTime
 
-def calculateCost(data,operationAsignmentByMachineAndOperationSorted,operationAsignmentByPieceAndOperation):
+def calculateCost(data,operationAsignmentByPieceAndOperation):
 
-    shippingTime = calculateShippingTime(data,operationAsignmentByMachineAndOperationSorted)
+    shippingTime = calculateShippingTime(data,operationAsignmentByPieceAndOperation)
 
     #Working Cost
     acumulatedWorkingCost = 0
@@ -45,7 +45,7 @@ def calculateCost(data,operationAsignmentByMachineAndOperationSorted,operationAs
     else:
         acumulatedRuptureCost = 0
 
-    dprint('RuptureCost: '+str(acumulatedRuptureCost),True)
+    dprint('ruptureCost: '+str(acumulatedRuptureCost),debug)
 
     totalCost = acumulatedWorkingCost + acumulatedRuptureCost
 

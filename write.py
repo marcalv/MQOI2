@@ -3,7 +3,7 @@ import os
 
 debug = False
 
-def writeSolution(operationAsignmentByPieceAndOperation,totalCost,folder):
+def writeSolution(operationAsignmentByPieceAndOperation,totalCost,folder,fileName):
     lines = []
     solIni = str(totalCost)+'*'+'5'
     lines.append(solIni)
@@ -20,12 +20,11 @@ def writeSolution(operationAsignmentByPieceAndOperation,totalCost,folder):
             pieceLine=pieceLine+str(operation['start'])+'*'
         lines.append(pieceLine[:-1])
 
-    with open(os.path.join(folder, 'sol'+'.txt'), 'w') as f:
+    with open(os.path.join(folder, fileName+'.txt'), 'w') as f:
         for line in lines:
             f.write("%s\n" % line)
 
     dprint(lines,debug)
-
 
 
 

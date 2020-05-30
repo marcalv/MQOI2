@@ -1,5 +1,6 @@
 from helper import pprint, writeToJson
 import os
+from math import sqrt
 
 examplesFolder = 'dataExamples'
 
@@ -16,6 +17,7 @@ def readlines(fileName):
     fp.close()
 
     return lines
+
 
 def parseLines(lines):
     # Generate data dictionary from lines
@@ -82,6 +84,25 @@ def calculateExtra(data):
         workingCostAverage = sumWorkingCost/len(piece)
         workingCostAverageByPiece.append(workingCostAverage)
     data["extra"]["workingCostAverageByPiece"]= workingCostAverageByPiece
+
+    # Calculate: workingCostSumByPiece
+    workingCostSumByPiece = []
+    for piece in data["workingCostByPieceAndOperation"]:
+        sumWorkingCost = 0
+        for workingCost in piece:
+            sumWorkingCost = sumWorkingCost + workingCost
+        workingCostSumByPiece.append(sumWorkingCost)
+    data["extra"]["workingCostSumByPiece"]= workingCostSumByPiece
+
+    # Calculate: workingCostRMSByPiece
+    workingCostRMSByPiece = []
+    for piece in data["workingCostByPieceAndOperation"]:
+        sumWorkingCost = 0
+        for workingCost in piece:
+            sumWorkingCost = sumWorkingCost + workingCost*workingCost
+        workingCostRMS = sqrt(sumWorkingCost/len(piece))
+        workingCostRMSByPiece.append(workingCostRMS)
+    data["extra"]["workingCostRMSByPiece"]= workingCostRMSByPiece
 
     return data
 
