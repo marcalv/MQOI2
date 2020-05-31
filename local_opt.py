@@ -22,9 +22,10 @@ def list_generator(pieceOrder):
             pieceOrderMod[i+longitudCambio] = pieceOrder[i]
             orderList.append(pieceOrderMod)
     
+    #orderList=[pieceOrder] #ELIMINAAAAAAAAAAAAR
     return orderList
 
-optimised = True
+
 
 
 def random_mod(pieceOrder):
@@ -39,6 +40,7 @@ def random_mod(pieceOrder):
 
 
 def local_opti(dataFileExample,bestSolution):
+    bestSolution['localOpt'] = False
 
     # Calcular el orden de piezas de la solución ganadora
     data = getData(dataFileExample)
@@ -46,7 +48,7 @@ def local_opti(dataFileExample,bestSolution):
     pieceOrder_mother = getPieceOrderBy(data,bestSolution["sortingMethod"])
     best_totalCost = bestSolution['totalCost']
 
-    max_fails = 5
+    max_fails = 4
     fails = 0
     pieceOrder_mother_failed = []
     while fails< max_fails:
@@ -91,7 +93,7 @@ def local_opti(dataFileExample,bestSolution):
     bestSolution['totalCost'] = best_totalCost
     
     if len(bestSolution['log'])>1:
-        bestSolution['sortingMethod'] = 'Local Opt'
+        bestSolution['localOpt'] = True
         bestSolution['operationAsignmentByPieceAndOperation'] = best_operationAsignmentByPieceAndOperation
         
     return bestSolution
