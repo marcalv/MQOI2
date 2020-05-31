@@ -1,2 +1,2 @@
 Ejemplar;Objetivo;Resultado;Margen Mejora (%);Tiempo ejecución; Método Ordenación;    Método Colocación; Optimización Local; Número Mejoras; Timeout
-ejemplar_calibrado_1.txt;1046616,5362999989;79843,40579999986;92,37128374808003;30,01075506210327;NUM_OPERATIONS_INV;SPOT_INV;True;19;True;
+ejemplar_calibrado_1.txt;1046616,5362999989;84379,15469999997;91,93791118585825;21,391663074493408;WORKING_COST_SUM;SPOT_INV;True;8;False;

@@ -6,6 +6,7 @@ from write import writeSolution
 from helper import pprint, writeToJson, dprint
 import os
 import time
+from control_panel import LOCAL_OPT_MAX_FAILS, TIMEOUT
 
 #print(pieceOrder)
 
@@ -48,7 +49,7 @@ def local_opti(dataFileExample,bestSolution):
     pieceOrder_mother = getPieceOrderBy(data,bestSolution["sortingMethod"])
     best_totalCost = bestSolution['totalCost']
 
-    max_fails = 4
+    max_fails = LOCAL_OPT_MAX_FAILS
     fails = 0
     pieceOrder_mother_failed = []
     timeout = False
@@ -61,7 +62,7 @@ def local_opti(dataFileExample,bestSolution):
         for new_pieceOrder in orderList:
             # time control
             #print(time.time() - bestSolution['startTime'])
-            if (time.time() - bestSolution['startTime']) > 258:#300:
+            if (time.time() - bestSolution['startTime']) > TIMEOUT:
                 print('TIMEOUT')
                 timeout = True
                 break

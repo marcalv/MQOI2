@@ -5,6 +5,7 @@ from evaluate import calculateCost
 from write import writeSolution
 from helper import pprint, writeToJson, dprint
 from local_opt import local_opti
+from control_panel import RANDOM_INTENTS
 import os
 
 debug = True
@@ -85,13 +86,12 @@ def batchSolve(dataFileExample):
                 print('totalCost: '+str(solution["totalCost"]))
     
 
-    RANDOM_INTENTS = 100
     for placingMethod in placingMethods:
         for i in range(0,RANDOM_INTENTS):
             totalCost, operationAsignmentByPieceAndOperation = simpleSolve(dataFileExample,'RANDOM',placingMethod)
             if (bestSolution['totalCost'] == -1) or ( (bestSolution['totalCost'] >= 0) and (bestSolution['totalCost'] > totalCost) ):
                     bestSolution = {'totalCost': totalCost, 
-                                    'sortingMethod':sortingMethod,
+                                    'sortingMethod':'RANDOM',
                                     'placingMethod':placingMethod,
                                     'operationAsignmentByPieceAndOperation': operationAsignmentByPieceAndOperation
                                     }
