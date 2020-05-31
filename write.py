@@ -3,18 +3,27 @@ import os
 
 debug = False
 
-def writeSolution(operationAsignmentByPieceAndOperation,totalCost,folder,fileName):
-    lines = []
-    solIni = str(totalCost)+'*'+'5'
-    lines.append(solIni)
+def writeSolution(bestSolution,folder,fileName):
+    totalCost = bestSolution['totalCost']
+    operationAsignmentByPieceAndOperation = bestSolution['operationAsignmentByPieceAndOperation']
 
-    numImprovements = 0
+
+
+    lines = []
+
+    for optimization in bestSolution['log']:
+        line = str(optimization['totalCost'])+'*'+str(optimization['time'])
+        lines.append(line)
+    
+
+    numImprovements = len(bestSolution['log'])-1
     lines.append(numImprovements)
 
-    bestSolution = str(totalCost)+'*'+'5'
-    lines.append(bestSolution)
 
-    for piece in operationAsignmentByPieceAndOperation:
+    line = str(bestSolution['totalCost'])+'*'+str(bestSolution['executionTime'])
+    lines.append(line)
+
+    for piece in bestSolution['operationAsignmentByPieceAndOperation']:
         pieceLine=''
         for operation in piece:
             pieceLine=pieceLine+str(operation['start'])+'*'

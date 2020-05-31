@@ -153,7 +153,10 @@ def placeSpot(data,pieceOrder):
     return operationAsignmentByPieceAndOperation
 
 
-def placeINV(placingMethod,data,pieceOrder):
+def placeINV(placingMethod,data_original,pieceOrder):
+    import copy
+    data = copy.deepcopy(data_original)
+
     #1 Invertir orden operaciones en machineByPieceAndOperation y durationByPieceAndOperation
     for piece in range(0,data['numPieces']):
         data['durationByPieceAndOperation'][piece] = list(reversed(data['durationByPieceAndOperation'][piece]))

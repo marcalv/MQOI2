@@ -4,12 +4,14 @@ from placing import placePieces
 from evaluate import calculateCost
 from write import writeSolution
 from helper import pprint, writeToJson, dprint
+from local_opt import local_opti
 import os
 
 debug = True
 
-def checkSolution(dataFileExample,operationAsignmentByPieceAndOperation,totalCost):
-    writeSolution(operationAsignmentByPieceAndOperation,totalCost,'tester','sol')
+def checkSolution(dataFileExample,bestSolution):
+
+    writeSolution(bestSolution,'tester','sol')
     from shutil import copyfile
     copyfile(os.path.join('dataExamples', dataFileExample), os.path.join('tester', 'data.txt'))
 
@@ -51,7 +53,6 @@ def batchSolve(dataFileExample):
                         'RUPTURE_COST_INV',
                         'NUM_OPERATIONS',
                         'NUM_OPERATIONS_INV',
-                        'RANDOM'
                      ]
 
     placingMethods = [  "END",
@@ -106,3 +107,32 @@ def batchSolve(dataFileExample):
 
     return bestSolution
 
+def completeSolve(dataFileExample):
+    import time
+    start_time = time.time()
+    bestSolution=batchSolve(dataFileExample)
+
+    bestSolution['log']=[{'totalCost':bestSolution['totalCost'],'time':time.time()}]
+
+    bestSolution=local_opti(dataFileExample,bestSolution)
+
+    for solution in bestSolution['log']:
+        solution['time']=solution['time']-start_time
+    
+    bestSolution['executionTime'] = time.time()-start_time
+
+    print('')
+    print('===============================================================')
+    print('|||||||||    Best Solution with Local Optimization    |||||||||')
+    print('===============================================================')
+    print('sortingMethod: '+bestSolution["sortingMethod"])
+    print('placingMethod: '+bestSolution["placingMethod"])
+    print('totalCost: '+str(bestSolution["totalCost"]))
+    print('Log:')
+    if False:
+        for solution in bestSolution["log"]:
+            print('    Time: '+str(solution['time']))
+            print('    Cost: '+str(solution['totalCost']))
+            print('    ---')
+
+    return bestSolution

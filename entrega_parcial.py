@@ -1,10 +1,10 @@
 from read import getData
-from launcher import simpleSolve, checkSolution, batchSolve
+from launcher import simpleSolve, checkSolution, batchSolve, completeSolve
 from write import writeSolution
 
 
 dataFileExample = 'ejemplar_calibrado_1.txt'
-bestsolution=batchSolve(dataFileExample)
+bestSolution=completeSolve(dataFileExample)
 
-#checkSolution(dataFileExample,bestsolution['operationAsignmentByPieceAndOperation'],bestsolution['totalCost'])
-#writeSolution(bestsolution['operationAsignmentByPieceAndOperation'],bestsolution['totalCost'],'')
+checkSolution(dataFileExample,bestSolution)
+writeSolution(bestSolution,'outputs','sol')
