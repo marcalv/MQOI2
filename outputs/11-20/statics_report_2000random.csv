@@ -1,0 +1,12 @@
+Ejemplar;Objetivo;Resultado;Margen Mejora (%);Tiempo ejecución; Método Ordenación;    Método Colocación; Optimización Local; Número Mejoras; Timeout
+ejemplar_calibrado_11.txt;663232,6517;85879,913;87,05131408;127,0468659;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_12.txt;528955,4915;65109,2347;87,69098048;88,59374714;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_13.txt;254594,4775;48038,4237;81,13139603;47,85937309;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_14.txt;361545,2138;46826,7243;87,04816922;43,34374833;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_15.txt;302721,478;57061,4147;81,15052322;53,15624785;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_16.txt;831939,4643;92018,7189;88,93925305;105,4467587;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_17.txt;582646,5866;70049,543;87,97735289;89,62502551;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_18.txt;492769,3146;67397,6036;86,32268658;91,67187405;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_19.txt;687485,8057;67671,9173;90,1566088;70,25000048;RANDOM;SPOT_INV;False;0;False
+ejemplar_calibrado_20.txt;801621,0562;93784,1184;88,30069175;142,9843736;RANDOM;SPOT_INV;False;0;False
+;;;86,57689761;;;;;;

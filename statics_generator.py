@@ -46,7 +46,7 @@ csv_lines.append(make_cabecera())
 
 objetivos = get_objetivos()
 
-for fileIndex in range(1,11):
+for fileIndex in range(11,21):
     dataFileExample = 'ejemplar_calibrado_'+str(fileIndex)+'.txt'
     print(dataFileExample)
     bestSolution=completeSolve(dataFileExample)
