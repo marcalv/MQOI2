@@ -113,7 +113,7 @@ def completeSolve(dataFileExample):
     bestSolution=batchSolve(dataFileExample)
 
     bestSolution['log']=[{'totalCost':bestSolution['totalCost'],'time':time.time()}]
-
+    bestSolution['startTime'] = start_time
     bestSolution=local_opti(dataFileExample,bestSolution)
 
     for solution in bestSolution['log']:

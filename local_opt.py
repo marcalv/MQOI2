@@ -51,11 +51,21 @@ def local_opti(dataFileExample,bestSolution):
     max_fails = 4
     fails = 0
     pieceOrder_mother_failed = []
-    while fails< max_fails:
+    timeout = False
+    while fails < max_fails:
+        
+
         optimised = False
         orderList = list_generator(pieceOrder_mother)
 
         for new_pieceOrder in orderList:
+            # time control
+            #print(time.time() - bestSolution['startTime'])
+            if (time.time() - bestSolution['startTime']) > 258:#300:
+                print('TIMEOUT')
+                timeout = True
+                break
+
             # Resolver
             new_operationAsignmentByPieceAndOperation = placePieces(data,new_pieceOrder,bestSolution["placingMethod"])
             new_totalCost = calculateCost(data,new_operationAsignmentByPieceAndOperation)
@@ -72,17 +82,23 @@ def local_opti(dataFileExample,bestSolution):
 
                 bestSolution['log'].append({'totalCost':best_totalCost,'time':time.time()})
         
-                
+        if timeout:
+            break            
 
         if not optimised:
             if pieceOrder_mother_failed == []:
                 print('First No optimized :(')
                 pieceOrder_mother_failed = pieceOrder_mother
+                #print('mother failed')
+                #print(pieceOrder_mother_failed)
                 #print(pieceOrder_mother_failed)
                 pieceOrder_mother = random_mod(pieceOrder_mother_failed)
+                #print('new random mother')
+                #print(pieceOrder_mother)
             else:
                 print('No optimized :(')
                 pieceOrder_mother = random_mod(pieceOrder_mother_failed)
+                #print('new random mother')
                 #print(pieceOrder_mother)
                 fails = fails+1
         else:
@@ -91,7 +107,7 @@ def local_opti(dataFileExample,bestSolution):
             fails = 0
     
     bestSolution['totalCost'] = best_totalCost
-    
+    bestSolution['timeOut'] = timeout
     if len(bestSolution['log'])>1:
         bestSolution['localOpt'] = True
         bestSolution['operationAsignmentByPieceAndOperation'] = best_operationAsignmentByPieceAndOperation

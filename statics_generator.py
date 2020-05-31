@@ -26,6 +26,8 @@ def make_line(dataFileExample,objetivos,bestSolution):
     lineitems.append(str(bestSolution['placingMethod']))
     lineitems.append(str(bestSolution['localOpt']))
     lineitems.append(str(len(bestSolution['log'])-1))
+    lineitems.append(str(bestSolution['timeOut']))
+
     
     line = ''
     for item in lineitems:
@@ -34,7 +36,7 @@ def make_line(dataFileExample,objetivos,bestSolution):
 
 def make_cabecera():
     cabecera = '''Ejemplar;Objetivo;Resultado;Margen Mejora (%);Tiempo ejecución; Método Ordenación;
-    Método Colocación; Optimización Local; Número Mejoras'''.replace('\n','')
+    Método Colocación; Optimización Local; Número Mejoras; Timeout'''.replace('\n','')
     return cabecera
 
 
@@ -44,7 +46,7 @@ csv_lines.append(make_cabecera())
 
 objetivos = get_objetivos()
 
-for fileIndex in range(1,20):
+for fileIndex in range(1,2):
     dataFileExample = 'ejemplar_calibrado_'+str(fileIndex)+'.txt'
     print(dataFileExample)
     bestSolution=completeSolve(dataFileExample)
