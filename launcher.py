@@ -7,6 +7,7 @@ from helper import pprint, writeToJson, dprint
 from local_opt import local_opti
 from control_panel import RANDOM_INTENTS
 import os
+import time
 
 debug = True
 
@@ -108,7 +109,7 @@ def batchSolve(dataFileExample):
     return bestSolution
 
 def completeSolve(dataFileExample):
-    import time
+    
     start_time = time.time()
     bestSolution=batchSolve(dataFileExample)
 
@@ -135,4 +136,49 @@ def completeSolve(dataFileExample):
             print('    Cost: '+str(solution['totalCost']))
             print('    ---')
 
+    return bestSolution
+
+
+
+def randomSolve(dataFileExample):
+    placingMethods = [  "END",
+                        "SPOT",
+                        "END_INV",
+                        "SPOT_INV"
+                     ]
+    
+    bestSolution={}
+    bestSolution['log']=[]
+    bestSolution['startTime'] = time.time()
+    ini = True
+
+    while True:
+        for placingMethod in placingMethods:
+            data = getData(dataFileExample)
+            pieceOrder = getPieceOrderBy(data, 'RANDOM')
+            operationAsignmentByPieceAndOperation = placePieces(data,pieceOrder,placingMethod)
+            totalCost = calculateCost(data,operationAsignmentByPieceAndOperation)
+
+
+            if (ini) or ( (bestSolution['totalCost'] >= 0) and (bestSolution['totalCost'] > totalCost) ):
+                    print(totalCost)
+                    ini = False
+                    bestSolution['log'].append({'totalCost':totalCost,'time':time.time()})
+                    bestSolution['totalCost'] = totalCost
+                    bestSolution['sortingMethod'] = 'RANDOM'
+                    bestSolution['placingMethod'] = placingMethod
+                    bestSolution['operationAsignmentByPieceAndOperation'] = operationAsignmentByPieceAndOperation
+        
+        # time control
+        #print(time.time() - bestSolution['startTime'])
+        if (time.time() - bestSolution['startTime']) > 5:
+            print('TIMEOUT')
+            break
+    
+    for solution in bestSolution['log']:
+        solution['time']=solution['time']-bestSolution['startTime']
+    
+    bestSolution['executionTime'] = time.time()-bestSolution['startTime']
+    bestSolution['localOpt'] = False
+    bestSolution['timeOut'] = True
     return bestSolution
