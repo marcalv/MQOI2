@@ -5,7 +5,7 @@ from evaluate import calculateCost
 from write import writeSolution
 from helper import pprint, writeToJson, dprint
 from local_opt import local_opti
-from control_panel import RANDOM_INTENTS
+from control_panel import TIMEOUT,RANDOM_INTENTS
 import os
 import time
 
@@ -171,7 +171,7 @@ def randomSolve(dataFileExample):
         
         # time control
         #print(time.time() - bestSolution['startTime'])
-        if (time.time() - bestSolution['startTime']) > 5:
+        if (time.time() - bestSolution['startTime']) > TIMEOUT:
             print('TIMEOUT')
             break
     
