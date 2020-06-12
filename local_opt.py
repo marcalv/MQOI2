@@ -120,9 +120,11 @@ def local_opti(dataFileExample,bestSolution):
     ### Modo Random
 
 
-    
+    bestSolution['wentToRandom'] = 'No'
+    bestSolution['randomImproved'] = '-'
     if RANDOM_SWITCH:
         bestSolution['wentToRandom'] = 'Yes'
+        bestSolution['randomImproved'] = 'No'
         print('entered in random')
         while True:
             placingMethods = [  "END",
