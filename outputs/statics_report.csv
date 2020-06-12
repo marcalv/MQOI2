@@ -1,0 +1,2 @@
+Ejemplar;Objetivo;Resultado;Margen Mejora (%);Tiempo ejecución; Método Ordenación;    Método Colocación; Optimización Local; Número Mejoras; Timeout; WentToRandom; RandomImproved
+ejemplar_calibrado_1.txt;1046616,5362999989;82127,11789999991;92,15308424321901;20,000755548477173;RANDOM;SPOT_INV;False;3;False;Yes;Yes;

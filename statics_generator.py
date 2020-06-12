@@ -27,6 +27,8 @@ def make_line(dataFileExample,objetivos,bestSolution):
     lineitems.append(str(bestSolution['localOpt']))
     lineitems.append(str(len(bestSolution['log'])-1))
     lineitems.append(str(bestSolution['timeOut']))
+    lineitems.append(str(bestSolution['wentToRandom']))
+    lineitems.append(str(bestSolution['randomImproved']))
 
     
     line = ''
@@ -36,7 +38,7 @@ def make_line(dataFileExample,objetivos,bestSolution):
 
 def make_cabecera():
     cabecera = '''Ejemplar;Objetivo;Resultado;Margen Mejora (%);Tiempo ejecución; Método Ordenación;
-    Método Colocación; Optimización Local; Número Mejoras; Timeout'''.replace('\n','')
+    Método Colocación; Optimización Local; Número Mejoras; Timeout; WentToRandom; RandomImproved'''.replace('\n','')
     return cabecera
 
 

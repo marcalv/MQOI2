@@ -6,7 +6,7 @@ from write import writeSolution
 from helper import pprint, writeToJson, dprint
 import os
 import time
-from control_panel import LOCAL_OPT_MAX_FAILS, TIMEOUT
+from control_panel import LOCAL_OPT_MAX_FAILS, TIMEOUT,RANDOM_SWITCH
 
 #print(pieceOrder)
 
@@ -107,10 +107,56 @@ def local_opti(dataFileExample,bestSolution):
             pieceOrder_mother_failed = []
             fails = 0
     
+
+
+    
     bestSolution['totalCost'] = best_totalCost
     bestSolution['timeOut'] = timeout
+
     if len(bestSolution['log'])>1:
         bestSolution['localOpt'] = True
         bestSolution['operationAsignmentByPieceAndOperation'] = best_operationAsignmentByPieceAndOperation
         
+    ### Modo Random
+
+
+    
+    if RANDOM_SWITCH:
+        bestSolution['wentToRandom'] = 'Yes'
+        print('entered in random')
+        while True:
+            placingMethods = [  "END",
+                            "SPOT",
+                            "END_INV",
+                            "SPOT_INV"
+                        ]
+
+            for placingMethod in placingMethods:
+                data = getData(dataFileExample)
+                pieceOrder = getPieceOrderBy(data, 'RANDOM')
+                operationAsignmentByPieceAndOperation = placePieces(data,pieceOrder,placingMethod)
+                totalCost = calculateCost(data,operationAsignmentByPieceAndOperation)
+
+
+                if bestSolution['totalCost'] > totalCost:
+                        print(totalCost)
+                        bestSolution['randomImproved'] = 'Yes'
+                        bestSolution['log'].append({'totalCost':totalCost,'time':time.time()})
+                        bestSolution['totalCost'] = totalCost
+                        bestSolution['sortingMethod'] = 'RANDOM'
+                        bestSolution['placingMethod'] = placingMethod
+                        bestSolution['operationAsignmentByPieceAndOperation'] = operationAsignmentByPieceAndOperation
+            
+            # time control
+            #print(time.time() - bestSolution['startTime'])
+            if (time.time() - bestSolution['startTime']) > TIMEOUT:
+                print('TIMEOUT')
+                break
+        
+
+
+
+
+
+
     return bestSolution
