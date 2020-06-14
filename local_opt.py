@@ -144,7 +144,7 @@ def local_opti(dataFileExample,bestSolution):
 
                 if bestSolution['totalCost'] > totalCost:
                         timeFound = time.time()
-                        print(str(new_totalCost) + ' ' + str(timeFound - bestSolution['startTime']))
+                        print(str(totalCost) + ' ' + str(timeFound - bestSolution['startTime']))
                         bestSolution['randomImproved'] = 'Yes'
                         bestSolution['log'].append({'totalCost':totalCost,'time':timeFound})
                         bestSolution['totalCost'] = totalCost
