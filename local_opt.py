@@ -122,7 +122,7 @@ def local_opti(dataFileExample,bestSolution):
 
     bestSolution['wentToRandom'] = 'No'
     bestSolution['randomImproved'] = '-'
-    if RANDOM_SWITCH:
+    if RANDOM_SWITCH and not timeout:
         bestSolution['wentToRandom'] = 'Yes'
         bestSolution['randomImproved'] = 'No'
         print('entered in random')
