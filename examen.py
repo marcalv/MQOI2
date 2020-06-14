@@ -1,7 +1,5 @@
-from read import getData
 from launcher import  checkSolution, completeSolve
 from write import writeSolution
-from read import readlines
 import os
 import sys
 
