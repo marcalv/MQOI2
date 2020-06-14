@@ -129,7 +129,8 @@ def completeSolve(dataFileExample):
     print('sortingMethod: '+bestSolution["sortingMethod"])
     print('placingMethod: '+bestSolution["placingMethod"])
     print('totalCost: '+str(bestSolution["totalCost"]))
-    print('Log:')
+    print('executionTime: '+str(bestSolution["executionTime"]))
+    #print('Log:')
     if False:
         for solution in bestSolution["log"]:
             print('    Time: '+str(solution['time']))

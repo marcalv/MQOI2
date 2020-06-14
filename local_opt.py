@@ -73,15 +73,17 @@ def local_opti(dataFileExample,bestSolution):
 
             # Si mejora
             if new_totalCost  < best_totalCost:
-                print('optmized!')
-                print(new_totalCost)
+                #print('optmized!')
+                timeFound = time.time()
+                print(str(new_totalCost) + ' ' + str(timeFound - bestSolution['startTime']))
+                
 
                 best_totalCost = new_totalCost
                 best_operationAsignmentByPieceAndOperation = new_operationAsignmentByPieceAndOperation
                 best_pieceOrder = new_pieceOrder
                 optimised = True 
 
-                bestSolution['log'].append({'totalCost':best_totalCost,'time':time.time()})
+                bestSolution['log'].append({'totalCost':best_totalCost,'time':timeFound})
         
         if timeout:
             break            
@@ -141,9 +143,10 @@ def local_opti(dataFileExample,bestSolution):
 
 
                 if bestSolution['totalCost'] > totalCost:
-                        print(totalCost)
+                        timeFound = time.time()
+                        print(str(new_totalCost) + ' ' + str(timeFound - bestSolution['startTime']))
                         bestSolution['randomImproved'] = 'Yes'
-                        bestSolution['log'].append({'totalCost':totalCost,'time':time.time()})
+                        bestSolution['log'].append({'totalCost':totalCost,'time':timeFound})
                         bestSolution['totalCost'] = totalCost
                         bestSolution['sortingMethod'] = 'RANDOM'
                         bestSolution['placingMethod'] = placingMethod
